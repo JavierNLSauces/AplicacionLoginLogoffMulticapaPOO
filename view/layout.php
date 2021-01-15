@@ -11,7 +11,7 @@
         </head>
         <body>
 
-            <?php require_once $vista ?>
+            <?php require_once $vistaEnCurso ?>
 
         <footer class="fixed">
             <a href="http://daw217.ieslossauces.es/" target="_blank"> <img src="webroot/media/oneandone.png" alt="oneandone icon" width="40"></a>
