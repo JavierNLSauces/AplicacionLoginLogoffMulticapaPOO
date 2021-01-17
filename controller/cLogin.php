@@ -6,11 +6,18 @@ if(!isset($_COOKIE['idioma'])){
     exit;
 }
 
-if (isset($_REQUEST['idiomaElegido'])) { // si se ha pulsado el botton de cerrar sesion
+if (isset($_REQUEST['idiomaElegido'])) { // si se ha pulsado el botton de idiomaElegido
     setcookie('idioma', $_REQUEST['idiomaElegido'], time() + 2592000); // modifica la cookie 'idioma' con el valor recibido del formulario para 30 dias
     header('Location: index.php');
     exit;
 }
+
+if (isset($_REQUEST['Registrarse'])) { // si se ha pulsado el boton de registrarse
+    $_SESSION['paginaEnCurso'] = $controladores['registro']; // guardamos en la variable de sesion 'pagina' la ruta del controlador del registro
+    
+    header('Location: index.php');
+    exit;
+} else {
 
 define("OBLIGATORIO", 1); // defino e inicializo la constante a 1 para los campos que son obligatorios
 
@@ -26,7 +33,7 @@ if (isset($_REQUEST["IniciarSesion"])) { // comprueba que el usuario le ha dado 
 
     $aErrores['Password'] = validacionFormularios::validarPassword($_REQUEST['Password'], 8, 1, 1, OBLIGATORIO);// comprueba que la entrada del password es correcta
 
-    $oUsuario = UsuarioPDO::validarUsuario($_REQUEST['CodUsuario'], $_REQUEST['Password']); // guardamos en la variable el resultado de la funcion que valida qsi existe un usuario con el codigo y password introducido
+    $oUsuario = UsuarioPDO::validarUsuario($_REQUEST['CodUsuario'], $_REQUEST['Password']); // guardamos en la variable el resultado de la funcion que valida si existe un usuario con el codigo y password introducido
 
     if(!isset($oUsuario)){ // si es null 
         $aErrores['CodUsuario'] = "El codigo de usuario no se encuentra en la base de datos"; // guardo en el array de errores el error de que no existe el codigo de usuario en la base de datos
@@ -44,12 +51,16 @@ if (isset($_REQUEST["IniciarSesion"])) { // comprueba que el usuario le ha dado 
 if ($entradaOK) { // si la entrada esta bien recojo los valores introducidos y hago su tratamiento
 
     $_SESSION['usuarioDAW2LoginLogoffMulticapaPOO'] = $oUsuario; // guarda en la session el objeto usuario
+    $_SESSION['paginaEnCurso'] = $controladores['inicio']; // guardamos en la variable de sesion 'pagina' la ruta del controlador del inicio
 
-    header('Location: index.php');
+    header('Location: index.php'); // redirige al index.php
     exit;
 
 }
 
 $vistaEnCurso = $vistas['login']; // guardamos en la variable vistaEnCurso la vista que queremos implementar
+
+}
+
 require_once $vistas['layout'];
 ?> 
