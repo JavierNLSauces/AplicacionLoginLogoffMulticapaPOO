@@ -6,7 +6,7 @@
 
 **Fecha Inicio Proyecto: 21/12/2020**
 
-**Ultima Actualización: 15/01/2021**
+**Ultima Actualización: 18/01/2021**
 
 ## Descripción 
 Aplicación multicapa orientada a objetos de control de acceso mediante sesiones, utilizacion de cookies.
@@ -15,6 +15,7 @@ Aplicación multicapa orientada a objetos de control de acceso mediante sesiones
 
 ### Control de Acceso
 - Control de Acceso (mediande ventana de login)
+- Registro de Usuarios
 
 ## Front end
 - HTML
